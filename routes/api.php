@@ -5,9 +5,13 @@ use Illuminate\Http\Request;
 Route::group([
 
     'middleware' => 'api',
-    'prefix' => 'auth'
+//    'prefix' => 'auth'
 
 ], function () {
+
+    Route::post('test',function(){
+        return 'hola mundo';
+    });
 
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
@@ -15,3 +19,4 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
+

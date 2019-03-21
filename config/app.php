@@ -164,6 +164,7 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
 
+
         /*
          * Package Service Providers...
          */
