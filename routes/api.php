@@ -20,3 +20,7 @@ Route::group([
 
 });
 
+Route::prefix('radicado')->group(function (){
+   Route::get('get-tipo-pqrs','CustomsControllers\Radicado\RadicadoController@getTipoPqrs');
+});
+
