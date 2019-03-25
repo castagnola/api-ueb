@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 Route::group([
 
     'middleware' => 'api',
-//    'prefix' => 'auth'
+    'prefix' => 'auth'
 
 ], function () {
 
