@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TipoPqrs extends Model
+class UsuarioEstadoRadicado extends Model
 {
     /** @var string Table of BD */
-    protected $table = 'tipo_pqrs';
+    protected $table = 'usuario_estado_radicado';
     public $timestamps = false;
     //
 }

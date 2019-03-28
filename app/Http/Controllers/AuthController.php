@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SignUpRequest;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +16,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login','singup']]);
     }
 
     /**
@@ -24,13 +26,21 @@ class AuthController extends Controller
      */
     public function login()
     {
-        $credentials = request(['usuario', 'clave']);
+        $credentials = request(['identificacion', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Credenciales incorrectas'], 401);
         }
 
         return $this->respondWithToken($token);
+    }
+
+    public function singup(SignUpRequest $request)
+    {
+       $user= User::create($request->all());
+
+       return $this->login($request);
+
     }
 
     /**
