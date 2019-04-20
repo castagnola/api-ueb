@@ -76,7 +76,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the token array structure.
+     * Get the token array structure and the response of the login.
      *
      * @param  string $token
      *
@@ -88,7 +88,11 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'usuario' =>auth()->user()->name,
+            'usuario' =>auth()->user()->nombre,
+            'perfil' =>auth()->user()->id_perfil,
+            'identificacion' =>auth()->user()->identificacion,
+            'id_usuario'=>auth()->user()->id,
         ]);
     }
+
 }

@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RadicadoController extends Controller
 {
+    public $contrasena;
+
     /**
      * @return mixed tipos radicados activos
      */
@@ -33,7 +35,7 @@ class RadicadoController extends Controller
 
         }
 
-//        $this->sendEmail($request->correo);
+        $this->sendEmail($request->correo);
         $this->saveUserRadicado($request);
         return $this->succesResponse();
     }
@@ -69,14 +71,20 @@ class RadicadoController extends Controller
     }
 
     /**
-     * @param $email data as send
+     * @param $email data  the element to  send
      */
     public function sendEmail($email)
     {
-        $password = str_random(10);
-        $passwordCryp = $this->generatePassword($password);
-        $newUser = new User();
-        Mail::to($email)->send(new SendEmail);
+        $password = str_random(6);
+        $this->savePassword($password);
+        Mail::to($email)->send(new SendEmail($password));
+
+    }
+
+    public function savePassword($password)
+    {
+
+        return $this->contrasena = $password;
 
     }
 
@@ -85,12 +93,14 @@ class RadicadoController extends Controller
         /**
          * Encryp the string
          */
+
         return bcrypt($password);
     }
 
     /**
      * Method to save Radicado
      * @param $data
+     *  @return
      */
     public function saveRadicado($data)
     {
@@ -98,32 +108,39 @@ class RadicadoController extends Controller
         $id = User::select('id')->where('identificacion', $data->identificacion)->first();
         $radicado->email = $data->correo;
         $radicado->telefono = $data->telefono;
-        $radicado->numero_radicado = str_random(2);
+        $radicado->numero_radicado = random_int(2,10);
         $radicado->id_tipo_pqrs = $data->id_tipo_pqrs;
         $radicado->comentarios = $data->comentarios;
         $radicado->id_usuario = $id->id;
+        $estado = $data->id_tipo_pqrs != 5 ? $estado=1 : $estado = 4;
+        $radicado->id_estado_radicado = $estado;
         $radicado->save();
+
+        return $radicado;
 
     }
 
     /**
      * Method to save user no exist on the Db
      * @param $data
+     * @return
      */
     public function saveUserRadicado($data)
     {
         /** @var  $user crate Usuario */
 
         $user = new User();
-        $password = bcrypt(str_random(60));
+        $password = bcrypt(str_random(6));
         $user->nombre = $data->nombre;
         $user->identificacion = $data->identificacion;
         $user->email = $data->correo;
         $user->telefono = $data->telefono;
-        $user->password = $password;
+        $user->password = $this->contrasena;
+        $user->id_perfil = 2;
         $user->save();
 
         $this->saveRadicado($data);
+        return $user;
     }
 
 
