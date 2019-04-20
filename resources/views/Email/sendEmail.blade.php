@@ -1,12 +1,15 @@
 @component('mail::message')
-# Introduction
+Te damos la bienvenia a nuestro sistema de PQRS, recuerda para acceder a nuestra aplicación debes hacerlo mediante<br>
+tu IDENTIFICACION y CONTRASEÑA...
 
-The body of your message.
+Hemos generado una contraseña para ti: {{$password}}
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => 'http://localhost:4200/login'])
+Acceder
 @endcomponent
 
 Thanks,<br>
-{{ config('app.name') }}
+UEB PQRS
+
+{{--{{ config('app.name') }}--}}
 @endcomponent
