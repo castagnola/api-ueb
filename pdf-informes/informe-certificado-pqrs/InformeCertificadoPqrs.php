@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 require_once "AuxInformeCertificadoPqrs.php";
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
-
+$_POST['id'];
 class InformeCertificadoPqrs extends AuxInformeCertificadoPqrs
 {
 
@@ -19,7 +19,7 @@ $header = '<html>
 
 $html = '<html>
 
-<div></div>
+<div>cuerpo</div>
 </html>';
 $mpdf->SetHTMLHeader($header);
 $mpdf->WriteHTML($html);

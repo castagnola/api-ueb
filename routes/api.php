@@ -33,6 +33,8 @@ Route::prefix('radicado')->group(function () {
 
 Route::prefix('dashboard-radicado')->group(function () {
     Route::get('get-lista-radicado','CustomsControllers\DashboardRadicado\DashboardRadicadoController@getListaRadicado');
+    Route::get('get-lista-radicado-reclamo','CustomsControllers\DashboardRadicado\DashboardRadicadoController@getListaRadicadoByReclamo');
+
 
 });
 

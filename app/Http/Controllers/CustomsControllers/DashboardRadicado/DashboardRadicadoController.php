@@ -19,12 +19,12 @@ use App\Http\Requests\SignUpRequest;
 
 class DashboardRadicadoController extends Controller
 {
-    function __construct()
-    {
 
-    }
-
-    function getListaRadicado(Request $request)
+    /**
+     * Consulta para traer los radicados por Peticion
+     * @return Radicado[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    function getListaRadicado()
     {
 
 
@@ -32,10 +32,20 @@ class DashboardRadicadoController extends Controller
             'usuario',
             'estadoRadicado',
             'tipo'
-        ])->where('id_usuario', '=', 33)->get();
+        ])->where('id_tipo_pqrs', '=', 1)->get();
         return $listaRadicado;
 
 
+    }
+
+    function getListaRadicadoByReclamo(){
+
+        $listaRadicado = Radicado::with([
+            'usuario',
+            'estadoRadicado',
+            'tipo'
+        ])->where('id_tipo_pqrs', '=', 2)->get();
+        return $listaRadicado;
     }
 
 }
