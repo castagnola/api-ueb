@@ -10,7 +10,6 @@ Route::group([
 ], function () {
 
 
-
     Route::post('test', function () {
         return 'hola mundo';
     });
@@ -21,19 +20,30 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
-    Route::get('get-lista-radicado','CustomsControllers\DashboardRadicado\DashboardRadicadoController@getListaRadicado');
 
 
 });
 
+/**
+ * Api RestFull Generico
+ */
+
+Route::get('get-all-estados', 'ResourceControllers\EstadoRadicadoController@index');
+
+/**
+ * API RestFull Custom
+ */
 Route::prefix('radicado')->group(function () {
     Route::get('get-tipo-pqrs', 'CustomsControllers\Radicado\RadicadoController@getTipoPqrs');
     Route::post('create-radicado', 'CustomsControllers\Radicado\RadicadoController@createRadicado');
 });
 
 Route::prefix('dashboard-radicado')->group(function () {
-    Route::get('get-lista-radicado','CustomsControllers\DashboardRadicado\DashboardRadicadoController@getListaRadicado');
-    Route::get('get-lista-radicado-reclamo','CustomsControllers\DashboardRadicado\DashboardRadicadoController@getListaRadicadoByReclamo');
+    Route::get('get-lista-radicado', 'CustomsControllers\DashboardRadicado\DashboardRadicadoController@getListaRadicado');
+    Route::get('get-lista-radicado-reclamo', 'CustomsControllers\DashboardRadicado\DashboardRadicadoController@getListaRadicadoByReclamo');
+    Route::get('get-lista-radicado-queja', 'CustomsControllers\DashboardRadicado\DashboardRadicadoController@getListaRadicadoByQueja');
+    Route::get('get-lista-radicado-sugerencia', 'CustomsControllers\DashboardRadicado\DashboardRadicadoController@getListaRadicadoBySugerencia');
+    Route::post('edit-estado-radicado/{id}', 'CustomsControllers\DashboardRadicado\DashboardRadicadoController@editEstadoRadicadoByid');
 
 
 });

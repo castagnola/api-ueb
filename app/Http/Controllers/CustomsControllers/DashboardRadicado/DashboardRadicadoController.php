@@ -38,7 +38,13 @@ class DashboardRadicadoController extends Controller
 
     }
 
-    function getListaRadicadoByReclamo(){
+    /**
+     * Consulta para traer los radicado por Reclamo
+     * @return Radicado[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+
+    function getListaRadicadoByReclamo()
+    {
 
         $listaRadicado = Radicado::with([
             'usuario',
@@ -47,5 +53,53 @@ class DashboardRadicadoController extends Controller
         ])->where('id_tipo_pqrs', '=', 2)->get();
         return $listaRadicado;
     }
+
+    /**
+     * Consulta para traer los radicados por Queja
+     * @return Radicado[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    function getListaRadicadoByQueja()
+    {
+
+        $listaRadicado = Radicado::with([
+            'usuario',
+            'estadoRadicado',
+            'tipo'
+        ])->where('id_tipo_pqrs', '=', 4)->get();
+        return $listaRadicado;
+    }
+
+    /**
+     * Consulta para traer los radicados por Sugerencia
+     * @return Radicado[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    function getListaRadicadoBySugerencia()
+    {
+
+        $listaRadicado = Radicado::with([
+            'usuario',
+            'estadoRadicado',
+            'tipo'
+        ])->where('id_tipo_pqrs', '=', 5)->get();
+        return $listaRadicado;
+    }
+
+    /**
+     * Funcion que edita el estado del radicado por el id
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+
+    function editEstadoRadicadoByid(Request $request, $id)
+    {
+        $radicado = Radicado::find($id);
+        $radicado->id_estado_radicado = $request->input('estado_radicado.id');
+        $radicado->justificacion =$request->input('justificacion');
+        $radicado->save();
+        return $radicado;
+
+    }
+
 
 }
