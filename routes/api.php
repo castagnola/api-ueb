@@ -29,6 +29,7 @@ Route::group([
  */
 
 Route::get('get-all-estados', 'ResourceControllers\EstadoRadicadoController@index');
+Route::get('get-all-tipo-pqrs', 'ResourceControllers\TipoPqrsController@index');
 
 /**
  * API RestFull Custom

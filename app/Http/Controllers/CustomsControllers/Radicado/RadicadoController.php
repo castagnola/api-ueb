@@ -7,7 +7,6 @@ use App\Radicado;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\DB;
 use App\TipoPqrs;
 use Illuminate\Support\Facades\Mail;

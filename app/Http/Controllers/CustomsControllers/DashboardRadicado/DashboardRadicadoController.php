@@ -95,7 +95,7 @@ class DashboardRadicadoController extends Controller
     {
         $radicado = Radicado::find($id);
         $radicado->id_estado_radicado = $request->input('estado_radicado.id');
-        $radicado->justificacion =$request->input('justificacion');
+        $radicado->justificacion = $request->input('justificacion');
         $radicado->save();
         return $radicado;
 
