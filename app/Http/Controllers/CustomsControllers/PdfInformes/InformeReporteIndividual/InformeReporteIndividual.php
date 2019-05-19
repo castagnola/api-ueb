@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\CustomsControllers\PdfInformes\InformeReporteGeneral;
+namespace App\Http\Controllers\CustomsControllers\PdfInformes\InformeReporteIndividual;
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header('Content-Type: application/json');
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomsControllers\PdfInformes\InformeReporteGeneral\AuxInformeReporteIndividual;
 use App\TipoPqrs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-require_once "AuxInformeController.php";
+require_once "AuxInformeReporteIndividual.php";
 
 
-class InformeReporteGeneral extends Controller
+class InformeReporteIndividual extends Controller
 {
     /**
      * Atributes
@@ -41,7 +42,7 @@ class InformeReporteGeneral extends Controller
          * Header
          */
         ob_start();
-        include "informeReporteGeneralHeaderTemplate.php";
+        include "informeReporteIndividualHeaderTemplate.php";
         $header = ob_get_contents();;
         ob_end_clean();
 
@@ -49,7 +50,7 @@ class InformeReporteGeneral extends Controller
          * Body
          */
         ob_start();
-        include "informeReporteGeneralBodyTemplate.php";
+        include "informeReporteIndividualBodyTemplate.php";
         $html = ob_get_contents();;
         ob_end_clean();
 
@@ -57,7 +58,7 @@ class InformeReporteGeneral extends Controller
          * Footer
          */
         ob_start();
-        include "informeReporteGeneralFooterTemplate.php";
+        include "informeReporteIndividualFooterTemplate.php";
         $footer = ob_get_contents();;
         ob_end_clean();
 
@@ -72,9 +73,9 @@ class InformeReporteGeneral extends Controller
      */
     public function init()
     {
-        $auxInforme = new AuxInformeController();
+        $auxInforme = new AuxInformeReporteIndividual();
 
-        isset($_GET["id"]) ? $this->informe = $auxInforme->getInfoReporteByTipo($_GET["id"]) : $this->informe = $auxInforme->getInfoReporte();
+        $this->informe= $auxInforme->getInfoReporteById($_GET["id"]);
 
 
     }

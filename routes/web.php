@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/informe', 'CustomsControllers\PdfInformes\InformeReporteGeneral\InformeReporteGeneral@showReporte');
+Route::get('/informe-individual', 'CustomsControllers\PdfInformes\InformeReporteIndividual\InformeReporteIndividual@showReporte');

@@ -7,40 +7,23 @@ use App\TipoPqrs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AuxInformeController extends Controller
+class AuxInformeReporteIndividual extends Controller
 {
     public $data;
-
-    /**
-     * Funcion para generar el reporte general
-     * @return Radicado[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
-     */
-    public function getInfoReporte()
-    {
-
-        $data = Radicado::with([
-            'usuario',
-            'estadoRadicado',
-            'tipo'
-
-        ])->get();
-
-        return $data;
-    }
 
     /**
      * Función para traer la informacion del reporte que recibe un tipo de pqrs
      * @param $idEstado
      * @return Radicado[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function getInfoReporteByTipo($idTipo)
+    public function getInfoReporteById($idRadicado)
     {
         $data = Radicado::with([
             'usuario',
             'estadoRadicado',
             'tipo'
 
-        ])->where('id_tipo_pqrs', '=', $idTipo)->get();
+        ])->where('id', '=', $idRadicado)->get();
 
         return $data;
     }
