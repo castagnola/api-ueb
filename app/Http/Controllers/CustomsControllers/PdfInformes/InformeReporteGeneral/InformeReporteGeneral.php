@@ -61,6 +61,9 @@ class InformeReporteGeneral extends Controller
         $footer = ob_get_contents();;
         ob_end_clean();
 
+        /**
+         * Pinta el PSF
+         */
         $mpdf->SetHTMLHeader($header);
         $mpdf->SetHTMLFooter($footer);
         $mpdf->WriteHTML($html);

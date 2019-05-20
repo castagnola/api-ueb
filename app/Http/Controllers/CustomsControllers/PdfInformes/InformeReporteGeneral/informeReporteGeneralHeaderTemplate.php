@@ -15,5 +15,5 @@ if (isset($_GET["id"])) {
     <?php
 }
 ?>
-<img style="height:100px;margin-top: -50px" src="../../../../../../views/images/logo.png"/>
+<!--<img style="height:100px;margin-top: -50px" src="../../../../../../views/images/logo.png"/>-->
 </html>
