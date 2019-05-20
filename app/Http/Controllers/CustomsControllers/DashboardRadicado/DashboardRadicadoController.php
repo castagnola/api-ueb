@@ -5,16 +5,12 @@ namespace App\Http\Controllers\CustomsControllers\DashboardRadicado;
 use App\Http\Controllers\AuthController;
 use App\Mail\SendEmail;
 use App\Radicado;
-use App\User;
+use App\RadicadoAud;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\TipoPqrs;
-use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
-use App\Http\Requests\SignUpRequest;
 
 
 class DashboardRadicadoController extends Controller
@@ -93,11 +89,38 @@ class DashboardRadicadoController extends Controller
 
     function editEstadoRadicadoByid(Request $request, $id)
     {
+        $fecha = new \DateTime();
         $radicado = Radicado::find($id);
         $radicado->id_estado_radicado = $request->input('estado_radicado.id');
         $radicado->justificacion = $request->input('justificacion');
         $radicado->save();
+
+
+        $aud = new RadicadoAud();
+
+        if($request->input('estado_radicado.id') == 2){
+            $aud->fecha= $fecha;
+            $aud->id_radicado =$request->input('id');
+            $aud->razon = 'Edicion al estado En estudio';
+            $aud->save();
+        }
+
+        if($request->input('estado_radicado.id') == 3){
+            $aud->fecha= $fecha;
+            $aud->id_radicado =$request->input('id');
+            $aud->razon = 'Edicion al estado Resuelto';
+            $aud->save();
+        }
+
+        if($request->input('estado_radicado.id') == 4){
+            $aud->fecha= $fecha;
+            $aud->id_radicado =$request->input('id');
+            $aud->razon = 'Edicion al estado Sugerencia';
+            $aud->save();
+        }
         return $radicado;
+
+
 
     }
 
